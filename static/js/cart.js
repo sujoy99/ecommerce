@@ -7,7 +7,6 @@ for(var i=0; i<updateBtns.length; i++)
     updateBtns[i].addEventListener('click', function(){
         var productId = this.dataset.product;
         var action = this.dataset.action;
-        console.log(productId);
 
         console.log("User:", user);
 
@@ -39,7 +38,7 @@ function updateUserOrder(productId, action)
             'action' : action
         })
     })
-    .thaen((response)=>{
+    .then((response)=>{
         return response.json()
     })
     .then((data)=>{
