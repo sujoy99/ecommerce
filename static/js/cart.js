@@ -26,8 +26,9 @@ function updateUserOrder(productId, action)
 {
     console.log("User is authenticated. Sending Data...");
 
-    var url = 'update_item/';
-    fetch(url, {
+    var url = '/update_item/';
+    fetch(url, 
+        {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json',
@@ -42,7 +43,8 @@ function updateUserOrder(productId, action)
         return response.json()
     })
     .then((data)=>{
-        console.log('data:', data)
+        console.log('data:', data);
+        location.reload();
     })
 }
 
