@@ -20,7 +20,8 @@ def store(request):
         items = []
         order = {
             'get_cart_item' : 0,
-            'get_cart_total' : 0
+            'get_cart_total' : 0,
+            'shipping' : False
         }
         cartItems = order['get_cart_item']
     
@@ -49,7 +50,8 @@ def cart(request):
         items = []
         order = {
             'get_cart_item' : 0,
-            'get_cart_total' : 0
+            'get_cart_total' : 0,
+            'shipping' : 'False'
         }
         cartItems = order['get_cart_item']
 
@@ -77,7 +79,8 @@ def checkout(request):
         items = []
         order = {
             'get_cart_item' : 0,
-            'get_cart_total' : 0
+            'get_cart_total' : 0,
+            'shipping' : 'False'
         }
         cartItems = order['get_cart_item']
 
