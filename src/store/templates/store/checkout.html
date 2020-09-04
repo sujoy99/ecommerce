@@ -71,8 +71,8 @@
 <script>
 	// showing shipping address
 	var shipping = "{{ order.shipping }}";
-	var total = '{{ order.get_cart_total|floatformat:2 }}'
-
+	var total = '{{ order.get_cart_total }}';
+	var item = '{{ order.get_cart_item }}';
 	if(shipping === "False")
 	{
 		document.getElementById('shipping-info').innerHTML = '';
@@ -89,6 +89,11 @@
 	{
 		document.getElementById('form-wrapper').classList.add('hidden');
 		document.getElementById('payment-info').classList.remove('hidden');
+	}
+
+	if(item<=0)
+	{
+		document.getElementById('payment-info').classList.add('hidden');
 	}
 
 	//subbmiting form
@@ -110,7 +115,8 @@
 		
 		var userFormData = {
 			'name' : null,
-			'email' : null
+			'email' : null,
+			'total' : total
 		}
 
 		var shippingInfo = {
@@ -133,6 +139,29 @@
 			userFormData.name = form.name.value;
 			userFormData.email = form.email.value;
 		}
+
+		//send post data using fetch api
+		var url = '/process_order/';
+		fetch(url, 
+			{
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json',
+				'X-CSRFToken' : csrftoken
+			},
+			body: JSON.stringify({
+				'form' : userFormData,
+				'shipping' : shippingInfo
+			})
+		})
+		.then((response)=>{
+			return response.json()
+		})
+		.then((data)=>{
+			console.log('Success:', data);
+			alert('Transaction complited');
+			window.location.href="{% url 'store' %}"
+		})
 	}
 </script>
 {% endblock %}
